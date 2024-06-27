@@ -35,7 +35,7 @@ class AuthController extends StateNotifier<bool>{
     state=true;
     final res= await _authApi.login(email: email, password: password);
     res.fold((l) =>showSnackBar(context, l.message) , (r) => {
-      Navigator.push(context, HomeView.route()), 
+      Navigator.push(context, HomeView.route()),
     });
     state=false;
 
