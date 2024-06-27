@@ -43,6 +43,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget build(BuildContext context) {
     final isLoading= ref.watch(authControllerProvider);
     return Scaffold(
+
       appBar:appBar,
 
       body: isLoading ? Loader(): Center(
