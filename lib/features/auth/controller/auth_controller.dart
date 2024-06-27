@@ -5,13 +5,22 @@ import 'package:twitterclone/apis/auth_api.dart';
 import 'package:twitterclone/core/utils.dart';
 import 'package:twitterclone/features/auth/view/login_view.dart';
 import 'package:twitterclone/features/home/view/home_view.dart';
+import 'package:appwrite/models.dart' as model;
+
 
 final authControllerProvider = StateNotifierProvider<AuthController,bool>((ref) {
   return AuthController(authApi: ref.watch(authApiProvider));
 });
+
+final currentUserAccountProvider =FutureProvider((ref)  {
+  final authController= ref.watch(authControllerProvider.notifier);
+  return authController.currentUser();
+});
 class AuthController extends StateNotifier<bool>{
   final AuthApi _authApi;
   AuthController({required AuthApi authApi}): _authApi=authApi ,super(false);
+
+
 
   void signUp ({
     required String email,
@@ -40,6 +49,8 @@ class AuthController extends StateNotifier<bool>{
     state=false;
 
   }
+
+  Future<model.User?> currentUser() => _authApi.currentUserAccount();
 
 }
 
