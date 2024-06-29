@@ -13,6 +13,9 @@ class AppTheme {
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Pallete.blueColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(90),
+      )
     ),
   );
 }

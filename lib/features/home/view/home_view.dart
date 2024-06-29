@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:twitterclone/constants/constants.dart';
 import 'package:twitterclone/theme/pallete.dart';
+import 'package:twitterclone/tweet/view/create_tweet_view.dart';
 
 class HomeView extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const HomeView());
@@ -22,10 +23,25 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
+  void onCreteTweet(){
+    Navigator.push(context, CreateTweetScreen.route());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      body: IndexedStack(
+        index: _page,
+        children:UIConstants.bottomNavBarPages,
+      ),
+      floatingActionButton:FloatingActionButton(
+        onPressed: onCreteTweet,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+
+        ),
+      ),
       bottomNavigationBar: CupertinoTabBar(
         backgroundColor: Pallete.backgroundColor,
         currentIndex: _page,

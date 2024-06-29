@@ -15,6 +15,12 @@ class UIConstants{
       centerTitle: true,
     );
   }
+
+  static const List<Widget> bottomNavBarPages=[
+    Text("Home"),
+    Text("Search"),
+    Text("Notification"),
+  ];
 }
 
 
