@@ -15,10 +15,22 @@ final authControllerProvider = StateNotifierProvider<AuthController,bool>((ref) 
   return AuthController(authApi: ref.watch(authApiProvider), userApi: ref.watch(userApiProvider));
 });
 
+final currentUserDetailsProvider = FutureProvider((ref){
+  final currentUserId= ref.watch(currentUserAccountProvider).value!.$id;
+  final userDetails=ref.watch(userDetailsProvider(currentUserId));
+  return userDetails.value;
+});
+
+final userDetailsProvider = FutureProvider.family((ref,String uid){
+  final authController= ref.watch(authControllerProvider.notifier);
+  return authController.getUserData(uid);
+});
+
 final currentUserAccountProvider =FutureProvider((ref)  {
   final authController= ref.watch(authControllerProvider.notifier);
   return authController.currentUser();
 });
+
 class AuthController extends StateNotifier<bool>{
   final AuthApi _authApi;
   final UserApi _userApi;
@@ -37,11 +49,11 @@ class AuthController extends StateNotifier<bool>{
 
     (r) async{
       UserModel userModel =UserModel(email: email, name: getNameFromEMail(email),
-          followers: [],
+          followers:  [],
           following: [],
           profilePic: '',
           bannerPic: '',
-          uid: '',
+          uid: r.$id,
           bio: '',
           isTwitterBlue: false);
       final res2 = await _userApi.saveUserData(userModel);
@@ -74,6 +86,12 @@ class AuthController extends StateNotifier<bool>{
   }
 
   Future<model.User?> currentUser() => _authApi.currentUserAccount();
+
+  Future<UserModel> getUserData(String uid)async{
+    final document = await _userApi.getUserData(uid);
+    final updatedUser =  UserModel.fromMap(document.data);
+    return updatedUser;
+  }
 
 }
 
