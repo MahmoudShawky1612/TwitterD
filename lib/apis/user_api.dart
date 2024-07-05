@@ -6,7 +6,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:twitterclone/constants/appwrite_constants.dart';
 import 'package:twitterclone/core/core.dart';
 import 'package:twitterclone/core/providers.dart';
-import 'package:twitterclone/user_model.dart';
+import 'package:twitterclone/models/user_model.dart';
 
 
 final userApiProvider= Provider((ref) {

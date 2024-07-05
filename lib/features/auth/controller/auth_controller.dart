@@ -6,7 +6,7 @@ import 'package:twitterclone/core/utils.dart';
 import 'package:twitterclone/features/auth/view/login_view.dart';
 import 'package:twitterclone/features/home/view/home_view.dart';
 import 'package:appwrite/models.dart' as model;
-import 'package:twitterclone/user_model.dart';
+import 'package:twitterclone/models/user_model.dart';
 
 import '../../../apis/user_api.dart';
 
